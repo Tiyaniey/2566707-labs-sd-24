@@ -7,7 +7,8 @@
     ul {
     list-style-type: none;
     margin: 0;
-    padding: 0;
+    padding: 10px 20px;
+
     }
 
     li {
@@ -22,14 +23,18 @@
 		
 
         header {
+
             align-self: flex-start;
+            justify-content: space-between;
+            display: flex;
+            align-items: center;
         }
 
         footer {
             align-self: flex-end;
         }
 		
-		h4,p{
+		h2,p{
 			display: flex;
             justify-content: center;
             align-items: center;
@@ -39,7 +44,7 @@
             display: block;
             max-width: 100%;
             max-height: 100%;
-            margin: auto; /* This will center the image horizontally */
+            margin: auto; 
         }
 		main{ 
             display: flex;
@@ -50,44 +55,47 @@
 		
 		section{
 			flex:1;
-			padding: 0.5px;
+			padding: 20px;
 			border:1px solid #ccc;
 		}
+        li{
+            margin-right: 20px;
+        }
     </style>
     <body>
 	<header>
+        <h3>Welcome to Software Design Website</h3>
         <nav> 
             <ul>
-				<li>Welcome to Software Design Website</li>
-                <li><a href="#about us">About us</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#contact us">Contact us</a></li>
+                <li>About us</a></li>
+                <li>Services</a></li>
+                <li>Contact us</a></li>
             </ul>
 
 		</nav>
 	</header>
 		
-        <h4>About Us</h4>
+        <h2>About Us</h2>
 		<p> We are a company dedicated to providing excellent services to our customers.</p>
-		<img src="stock.jpg" width="600" height="400" align="center">
-		<h4>Our Services</h4>
+		<img src="main.jpg" width="600" height="400">
+		<h2>Our Services</h2>
 		<main>
 		
 		<section>
-		<h4>Web Development</h4>
+		<h2>Web Development</h2>
 		<p>We specialize in creating responsive and user friendly websites.</p>
-		<img src="stock.jpg" width="600" height="400" align="center">
+		<img src="web.jpg" width="600" height="400" align="center">
 		</section>
 		
 		<section>
-		<h4>Graphic design</h4>
+		<h2>Graphic design</h2>
 		<p>Our talented designers can bring your ideas to life with stunning visuals.</p>
-		<img src="stock.jpg" width="600" height="400" align="center">
+		<img src="graph.jpg" width="600" height="400" align="center">
 		</section>
 		
 		</main>
 		<footer>
-		<p>2024 The Lucky Company. All rights reserved.</p>
+		<p> &copy; 2024 The Lucky Company. All rights reserved.</p>
 		</footer>
     </body>
 </html>
