@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Country Information</title>
+    <style>
+         body {
+        font-family: Arial, sans-serif;
+        line-height: 1.5;
+    }
+        .country-info,.bordering-countries{
+            display: inline-block;
+            align-items: flex-start;
+            width: 40%;
+            justify-content: space-between;
+            
+        }
+        ul{
+            list-style-type: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Country Information</h1>
+    <input type="text" id="countryInput" placeholder="Enter a country">
+    <button onclick="fetchCountryData()">Get Country Info</button><br>
+
+    <h2 id="countryName"></h2>
+    <p id="countryInfo" class="country-info"></p>
+    <ul id="borderingCountries" class="bordering-countries"></ul>
+
+    <script>
+        async function fetchCountryData() {
+            const input = document.getElementById("countryInput").value;
+            const countryName = document.getElementById("countryName");
+            const countryInfo = document.getElementById("countryInfo");
+            const borderingCountries = document.getElementById("borderingCountries");
+
+            try {
+                const response = await fetch(`https://restcountries.com/v3.1/name/${input}`);
+                const data = await response.json();
+
+                if (data.status === 404) {
+                    countryName.textContent = "Country not found!";
+                    countryInfo.textContent = "";
+                    borderingCountries.innerHTML = "";
+                    return;
+                }
+
+                const country = data[0];
+                const capital = country.capital[0];
+                const population = country.population;
+                const region = country.region;
+                const flag = country.flags.svg;
+
+                let borderingCountriesHTML = "<h2>Bordering Countries:</h2>";
+
+                for (const neighbor of country.borders) {
+                    const neighborResponse = await fetch(`https://restcountries.com/v3.1/alpha/${neighbor}`);
+                    const neighborData = await neighborResponse.json();
+                    borderingCountriesHTML += `<li>${neighborData[0].name.common} <img src="${neighborData[0].flags.svg}" width="20px"></li>`;
+                }
+
+                countryName.textContent = input;
+                countryInfo.innerHTML = `
+                    Capital: ${capital}<br>
+                    Population: ${population}<br>
+                    Region: ${region}<br>
+                    <img src="${flag}" width="100px">
+                `;
+                borderingCountries.innerHTML = borderingCountriesHTML;
+
+            } catch (error) {
+                console.error("Error fetching country data:", error);
+                countryName.textContent = "Error fetching country data. Please try again later.";
+                countryInfo.textContent = "";
+                borderingCountries.innerHTML = "";
+            }
+        }
+    </script>
+</body>
+</html>
